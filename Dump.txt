@@ -1,0 +1,111 @@
+slowMo: 2000, devtools: true,
+
+
+//main page
+/*await page.$$eval(".uk-accordion-title", function(elements){
+    elements.forEach(el => el.click());
+  });
+
+//await page.pdf({path: 'OCI_API.pdf', format: 'A4'});
+
+*/
+
+
+
+
+
+
+
+/*
+
+//subpages
+await page.$$eval("nav.vl-sidebar-left > div > ul > li", async function(elements){
+
+  let filename;
+  let tempArr;
+  let element;
+  var sleep = function (ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  };
+
+  for(let index=0;index<elements.length;index++){
+      element = elements[index];
+
+      console.log(element);
+
+      await sleep(3000);
+   
+      //open the list of subsections
+      Array.from(element.querySelectorAll("a")).forEach(links => links.click());
+
+      await sleep(4000);
+
+      element = Array.from(document.querySelectorAll("nav.vl-sidebar-left > div > ul > li"))[index];
+      //opens each subsections
+      Array.from(element.querySelectorAll("button")).forEach( (but,i) => {
+        if(i>0)
+          but.click();
+      });
+
+      await sleep(4000);
+
+      element = Array.from(document.querySelectorAll("nav.vl-sidebar-left > div > ul > li"))[index];
+
+      //after opening subsection, loop over all links and generate pdfs.
+      tempArr = Array.from(element.querySelectorAll("a"));
+      
+      console.log("tempArr length: " + tempArr.length);
+
+      for(let i=1; i<tempArr.length; i++){
+
+        if(tempArr[i].classList.contains("uk-position-relative"))
+          continue;
+
+        filename = tempArr[i].innerText + ".pdf";
+        tempArr[i].click();
+        await page.pdf({path: './pdf/' + filename, format: 'A4'});
+      }
+
+       //since we opened subsection list we need refetch the li as elements were added to li 
+       //and we need to wait few seconds before we do that.
+      /*setTimeout(async function(){
+        
+        //open the list of subsections
+        Array.from(element.querySelectorAll("a")).forEach(links => links.click());
+        
+        console.log(index);
+        updatedElement = Array.from(document.querySelectorAll("nav.vl-sidebar-left > div > ul > li"))[index];
+        
+        //console.log(Array.from(element.querySelectorAll("button")));
+        //console.log(updatedElement);
+  
+        //opens each subsections
+        Array.from(updatedElement.querySelectorAll("button")).forEach( (but,i) => {
+          if(i>0)
+            but.click();
+        });
+    
+        lastUpdatedElement = Array.from(document.querySelectorAll("nav.vl-sidebar-left > div > ul > li"))[index];
+    
+        //console.log(element);
+        //console.log(Array.from(element.querySelectorAll("a")));
+
+        //after opening subsection, loop over all links and generate pdfs.
+        tempArr = Array.from(lastUpdatedElement.querySelectorAll("a"));
+        
+        console.log("tempArr length: " + tempArr.length);
+
+        for(let i=1; i<tempArr.length; i++){
+
+          if(tempArr[i].classList.contains("uk-position-relative"))
+            continue;
+
+          filename = tempArr[i].innerText + ".pdf";
+          tempArr[i].click();
+          await page.pdf({path: './pdf/' + filename, format: 'A4'});
+        }
+  
+      },2000 * index);
+  }
+
+});*/
