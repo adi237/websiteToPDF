@@ -1,0 +1,6 @@
+*.zip
+node_modules/
+
+
+pdf/*
+!pdf/.gitkeep
