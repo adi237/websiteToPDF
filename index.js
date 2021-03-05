@@ -2,7 +2,9 @@ const fs = require('fs');
 const shell = require('shelljs');
 const puppeteer = require('puppeteer');
 
-(async () => {
+const GIT_PDF_REPO_FOLDER_PATH = "./git_pdf_repo";
+
+/*(async () => {
 
   //Cleanup PDF folder
   if (shell.exec('rm -rf ./pdf/*').code !== 0) {
@@ -139,7 +141,45 @@ const puppeteer = require('puppeteer');
   else{
     console.log("zip created");
   }
-    
 
   await browser.close();
-})();
+})();*/
+
+
+function uploadToGit(){
+    //Cleanup git repo folder
+    if (shell.exec(`rm -rf ${GIT_PDF_REPO_FOLDER_PATH}`).code !== 0) {
+      shell.echo('Error While deleting pdf repo contents');
+    }
+    else
+      shell.echo("pdf repo cleaned");
+
+    
+    //Cleanup subgitfolder
+    shell.exec(`git rm --cached ${GIT_PDF_REPO_FOLDER_PATH}`);
+    shell.exec(`rm -rf ${GIT_PDF_REPO_FOLDER_PATH}`);
+    shell.exec(`rm -rf .git/modules/${GIT_PDF_REPO_FOLDER_PATH.replace(".","")}`)
+
+
+      for(var i = 0; i<1000000000; i++){
+
+      }
+
+    //clonefresh copy of repo
+    shell.exec(`git submodule add https://github.com/adi237/oic-rest-apis-pdf ${GIT_PDF_REPO_FOLDER_PATH}`);
+
+    //before zipping move all other zips to the archive folder.
+    shell.exec(`mv ${GIT_PDF_REPO_FOLDER_PATH}/*.zip ./archive`);
+
+    //zip the folder and create the zip in the git repo
+    shell.exec(`zip ${GIT_PDF_REPO_FOLDER_PATH}/OCI_APIs_PDF_${new Date().toISOString()}.zip ./pdf`);
+    
+    shell.exec(`cd ${GIT_PDF_REPO_FOLDER_PATH}`);
+
+    //git add commit and push.
+    shell.exec(`git add *`);
+    shell.exec(`git commit -m "Adding new Zip - ${new Date()}"`);
+    shell.exec(`git push origin main`);
+}
+
+uploadToGit();

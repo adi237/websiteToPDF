@@ -1,0 +1,3 @@
+[submodule "git_pdf_repo"]
+	path = git_pdf_repo
+	url = https://github.com/adi237/oic-rest-apis-pdf
