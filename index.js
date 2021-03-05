@@ -4,7 +4,7 @@ const puppeteer = require('puppeteer');
 
 const GIT_PDF_REPO_FOLDER_PATH = "./git_pdf_repo";
 
-/*(async () => {
+(async () => {
 
   //Cleanup PDF folder
   if (shell.exec('rm -rf ./pdf/*').code !== 0) {
@@ -143,7 +143,7 @@ const GIT_PDF_REPO_FOLDER_PATH = "./git_pdf_repo";
   }
 
   await browser.close();
-})();*/
+})();
 
 
 function uploadToGit(){
@@ -159,11 +159,6 @@ function uploadToGit(){
     shell.exec(`git rm --cached ${GIT_PDF_REPO_FOLDER_PATH}`);
     shell.exec(`rm -rf ${GIT_PDF_REPO_FOLDER_PATH}`);
     shell.exec(`rm -rf .git/modules/${GIT_PDF_REPO_FOLDER_PATH.replace(".","")}`)
-
-
-      for(var i = 0; i<1000000000; i++){
-
-      }
 
     //clonefresh copy of repo
     shell.exec(`git submodule add https://github.com/adi237/oic-rest-apis-pdf ${GIT_PDF_REPO_FOLDER_PATH}`);
