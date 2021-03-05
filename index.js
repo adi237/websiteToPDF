@@ -142,6 +142,7 @@ const GIT_PDF_REPO_FOLDER_PATH = "./git_pdf_repo";
     console.log("zip created");
   }
 
+  uploadToGit();
   await browser.close();
 })();
 
@@ -176,5 +177,3 @@ function uploadToGit(){
     shell.exec(`git commit -m "Adding new Zip - ${new Date()}"`);
     shell.exec(`git push origin main`);
 }
-
-uploadToGit();
